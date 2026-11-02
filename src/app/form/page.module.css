@@ -1,0 +1,777 @@
+.container {
+  padding: 2rem 1.5rem;
+  max-width: 600px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 600px;
+  z-index: 100;
+  background: #000000;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 2rem 1.5rem 1.2rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  box-sizing: border-box;
+}
+
+.topBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.title {
+  color: #ffffff;
+  font-size: 1.8rem;
+  font-weight: 900;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: var(--font-orbitron), sans-serif;
+}
+
+.progressContainer {
+  width: 100%;
+}
+
+.progressHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.progressLabel {
+  font-family: var(--font-orbitron), sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  color: #88ff00;
+  font-weight: 600;
+}
+
+.stepNum {
+  font-family: var(--font-space), sans-serif;
+  font-weight: 700;
+}
+
+.progressPercentage {
+  font-family: var(--font-space), sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.progressBarBg {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progressBarFill {
+  height: 100%;
+  background: #88ff00;
+  box-shadow: 0 0 8px rgba(136, 255, 0, 0.5);
+  transition: width 0.3s ease-in-out;
+}
+
+.formBox {
+  margin-top: 8rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.stepTitle {
+  color: #fff;
+  margin-bottom: 1.5rem;
+  font-size: 1.35rem;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  text-transform: none;
+}
+
+.formGroup {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup label {
+  margin-bottom: 0.8rem;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: var(--font-inter);
+}
+
+.formGroup input[type="text"],
+.formGroup input[type="email"] {
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 1rem;
+  border-radius: 6px;
+  transition: all 0.3s;
+}
+
+.formGroup input:focus {
+  border-color: #88ff00;
+  outline: none;
+  box-shadow: 0 0 10px rgba(136, 255, 0, 0.2);
+}
+
+/* Checkbox group matching card styling */
+.checkboxGroup {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1.4rem 1.2rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  gap: 1.2rem;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+}
+
+.checkboxGroup > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (hover: hover) {
+  .checkboxGroup:hover {
+    background-color: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+}
+
+.checkboxGroup:has(input[type="checkbox"]:checked) {
+  border-color: rgba(136, 255, 0, 0.4);
+  background: linear-gradient(135deg, rgba(20, 30, 20, 0.95) 0%, rgba(30, 45, 20, 0.95) 100%);
+  box-shadow: 0 5px 20px rgba(136, 255, 0, 0.15);
+}
+
+.checkboxGroup:has(input[type="checkbox"]:checked)::before,
+.activeNumberCard::before {
+  content: "";
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 120%;
+  height: 140%;
+  background: radial-gradient(ellipse at center right, rgba(136,255,0,0.3) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.checkboxGroup:has(input[type="checkbox"]:checked)::after,
+.activeNumberCard::after {
+  content: "";
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 40%;
+  background-image: repeating-linear-gradient(45deg, rgba(136,255,0,0.15) 0px, rgba(136,255,0,0.15) 2px, transparent 2px, transparent 6px);
+  mask-image: linear-gradient(to right, transparent, black);
+  -webkit-mask-image: linear-gradient(to right, transparent, black);
+  pointer-events: none;
+  opacity: 0.5;
+  z-index: 0;
+}
+
+.checkboxGroup input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
+.checkboxGroup input[type="checkbox"]:not(:checked) {
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  box-shadow: none !important;
+  background: rgba(0, 0, 0, 0.4) !important;
+}
+
+.checkboxGroup:not(:has(input[type="checkbox"]:checked)) {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+}
+@media (hover: hover) {
+  .checkboxGroup input[type="checkbox"]:hover {
+    border-color: #88ff00;
+    box-shadow: 0 0 8px rgba(136, 255, 0, 0.2);
+  }
+}
+
+.checkboxGroup input[type="checkbox"]:checked {
+  background: #88ff00;
+  border-color: #88ff00;
+  box-shadow: 0 0 10px rgba(136, 255, 0, 0.3);
+}
+
+.checkboxGroup input[type="checkbox"]::after {
+  content: "";
+  width: 4px;
+  height: 8px;
+  border: solid #000;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) translate(-0.5px, -0.5px);
+  opacity: 0;
+  transition: opacity 0.1s ease;
+}
+
+.checkboxGroup input[type="checkbox"]:checked::after {
+  opacity: 1;
+}
+
+/* Modal Popup */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  backdrop-filter: blur(5px);
+  padding: 1rem;
+}
+
+.modalContent {
+  background: rgba(10, 10, 15, 0.95);
+  border: 1px solid rgba(255, 0, 80, 0.4);
+  box-shadow: 0 0 20px rgba(255, 0, 80, 0.15);
+  border-radius: 0;
+  padding: 1.5rem 1rem;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+  animation: fadeInModal 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modalTitle {
+  color: #ff0050;
+  font-family: var(--font-orbitron);
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+.modalMessage {
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+@keyframes fadeInModal {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.infoWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.challengeLabel {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.5); /* Dimmed color, matching stage percentage */
+  transition: color 0.2s ease;
+}
+
+.checkboxGroup:has(input[type="checkbox"]:checked) .challengeLabel {
+  color: #ffffff;
+}
+
+.xpBadge {
+  font-family: var(--font-space), sans-serif;
+  font-size: 0.85rem;
+  color: rgba(136, 255, 0, 0.85);
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  align-self: flex-start;
+}
+
+.checkboxGroup:has(input[type="checkbox"]:checked) .xpBadge,
+.activeNumberCard .xpBadge {
+  color: #88ff00;
+  text-shadow: 0 0 10px rgba(136, 255, 0, 0.5);
+}
+
+/* Number group matching card styling */
+.numberGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 1.4rem 1.2rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  margin-top: 1rem;
+  gap: 1.2rem;
+  position: relative;
+  overflow: hidden;
+  clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+}
+
+.numberGroup > * {
+  position: relative;
+  z-index: 1;
+}
+
+.activeNumberCard {
+  border-color: rgba(136, 255, 0, 0.4);
+  background: linear-gradient(135deg, rgba(20, 30, 20, 0.95) 0%, rgba(30, 45, 20, 0.95) 100%);
+  box-shadow: 0 5px 20px rgba(136, 255, 0, 0.15);
+}
+
+.activeNumberCard .challengeLabel {
+  color: #ffffff;
+}
+
+.quantitySelectors {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.quantityBtn {
+  flex: 1;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.6);
+  font-family: var(--font-space), sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quantityBtn:hover {
+  border-color: rgba(136, 255, 0, 0.5);
+  color: #fff;
+  background: rgba(136, 255, 0, 0.05);
+}
+
+.quantityBtnActive {
+  background: #88ff00 !important;
+  color: #000 !important;
+  border-color: #88ff00 !important;
+  box-shadow: 0 0 10px rgba(136, 255, 0, 0.4);
+}
+
+.actions {
+  display: flex;
+  flex-direction: column-reverse;
+  margin-top: 3rem;
+  gap: 0.8rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.loginActions {
+  margin-top: 0 !important; /* Move button closer to email input */
+}
+
+.sciBtnGreen {
+  background: linear-gradient(90deg, rgba(136, 255, 0, 0.1) 0%, rgba(136, 255, 0, 0) 100%);
+  color: #88ff00;
+  border: 1px solid #88ff00;
+  padding: 0.9rem 1rem;
+  font-family: var(--font-orbitron), sans-serif;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  text-align: center;
+  box-shadow: 0 0 10px rgba(136, 255, 0, 0.15);
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+@media (hover: hover) {
+  .sciBtnGreen:hover:not(:disabled) {
+    box-shadow: 0 0 20px rgba(136, 255, 0, 0.4);
+    transform: translateY(-2px);
+  }
+}
+
+.sciBtnGreen:focus {
+  outline: none;
+}
+
+.sciBtnGreen:disabled {
+  border-color: #333;
+  color: #555;
+  box-shadow: none;
+  background: rgba(255, 255, 255, 0.05);
+  cursor: not-allowed;
+}
+
+.sciBtnYellow {
+  background: linear-gradient(90deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0) 100%);
+  color: #ffd700;
+  border: 1px solid #ffd700;
+  padding: 0.9rem 1rem;
+  font-family: var(--font-orbitron), sans-serif;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  text-align: center;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.15);
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+@media (hover: hover) {
+  .sciBtnYellow:hover:not(:disabled) {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+    transform: translateY(-2px);
+  }
+}
+
+.sciBtnYellow:focus {
+  outline: none;
+}
+
+.sciBtnYellow:disabled {
+  border-color: #333;
+  color: #555;
+  box-shadow: none;
+  background: rgba(255, 255, 255, 0.05);
+  cursor: not-allowed;
+}
+
+.sciBtnSecondary {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.9rem 1rem;
+  font-family: var(--font-orbitron), sans-serif;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.sciBtnSecondary:focus {
+  outline: none;
+}
+
+@media (hover: hover) {
+  .sciBtnSecondary:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+.closedMessage {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+/* Surprise / Bonus Category styling */
+.surpriseTitleContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  gap: 0.6rem;
+}
+
+.surpriseBadge {
+  font-family: var(--font-orbitron), sans-serif;
+  color: #ffd700;
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.68rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.25);
+  animation: surprisePulse 2s infinite ease-in-out;
+}
+
+.surpriseStepTitle {
+  font-family: var(--font-orbitron), sans-serif;
+  font-weight: 700;
+  font-size: 1.6rem !important;
+  letter-spacing: 2px !important;
+  background: linear-gradient(135deg, #ffe600 0%, #ffaa00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.15);
+  text-align: center;
+}
+
+.surpriseChallengeCard {
+  background: rgba(255, 215, 0, 0.02) !important;
+  border: 1px solid rgba(255, 215, 0, 0.15) !important;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.surpriseChallengeCard:hover {
+  border-color: rgba(255, 215, 0, 0.4) !important;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.1) !important;
+}
+
+.checkboxGroup.surpriseChallengeCard:has(input[type="checkbox"]:checked),
+.numberGroup.surpriseChallengeCard.activeNumberCard {
+  border-color: #ffd700 !important;
+  background: linear-gradient(135deg, rgba(30, 25, 0, 0.95) 0%, rgba(45, 35, 0, 0.95) 100%) !important;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.2) !important;
+}
+
+.checkboxGroup.surpriseChallengeCard:has(input[type="checkbox"]:checked)::before,
+.numberGroup.surpriseChallengeCard.activeNumberCard::before {
+  background: radial-gradient(ellipse at center right, rgba(255,215,0,0.3) 0%, transparent 60%) !important;
+}
+
+.checkboxGroup.surpriseChallengeCard:has(input[type="checkbox"]:checked)::after,
+.numberGroup.surpriseChallengeCard.activeNumberCard::after {
+  background-image: repeating-linear-gradient(45deg, rgba(255,215,0,0.15) 0px, rgba(255,215,0,0.15) 2px, transparent 2px, transparent 6px) !important;
+}
+
+.surpriseChallengeCard .xpBadge {
+  color: #ffd700 !important;
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+}
+
+.surpriseChallengeCard input[type="checkbox"]:checked {
+  background: #ffd700 !important;
+  border-color: #ffd700 !important;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4) !important;
+}
+
+.surpriseChallengeCard .quantityBtnActive {
+  background: #ffd700 !important;
+  color: #000 !important;
+  border-color: #ffd700 !important;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4) !important;
+}
+
+@keyframes surprisePulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+  }
+}
+
+.suspenseBlur {
+  filter: blur(15px) brightness(0.2) sepia(1) hue-rotate(15deg);
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.2;
+  transition: all 1.2s ease-in-out;
+}
+
+.suspenseReveal {
+  filter: blur(0px) brightness(1) sepia(0);
+  opacity: 1;
+  transition: all 1.5s ease-in-out;
+}
+
+.summaryBox {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+}
+
+.summaryList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.summaryItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.summaryItem:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.summaryName {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+  flex: 1;
+  padding-right: 1rem;
+  text-align: left;
+}
+
+.summaryXp {
+  color: #88ff00;
+  font-family: var(--font-space), sans-serif;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.animContainer {
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+}
+
+.slideOutLeft {
+  animation-name: slideOutLeftAnim;
+}
+.slideOutRight {
+  animation-name: slideOutRightAnim;
+}
+.slideInRight {
+  animation-name: slideInRightAnim;
+}
+.slideInLeft {
+  animation-name: slideInLeftAnim;
+}
+
+@keyframes slideOutLeftAnim {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(-30px); }
+}
+@keyframes slideOutRightAnim {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(30px); }
+}
+@keyframes slideInRightAnim {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInLeftAnim {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.fadeInOpacity {
+  animation: fadeInOp 0.5s ease forwards;
+}
+
+.fadeOutOpacity {
+  animation: fadeOutOp 0.5s ease forwards;
+}
+
+@keyframes fadeInOp {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOutOp {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.pulseLogo {
+  animation: pulseLogoAnim 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes pulseLogoAnim {
+  0% { transform: scale(1); opacity: 0.8; filter: none; }
+  100% { transform: scale(1.05); opacity: 1; filter: none; }
+}
+
+.skeletonBox {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  animation: pulseSkeleton 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes pulseSkeleton {
+  0% { opacity: 0.3; }
+  100% { opacity: 0.8; }
+}
