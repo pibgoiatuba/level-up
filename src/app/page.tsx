@@ -212,20 +212,6 @@ export default function Home() {
               </div>
             </Link>
           </div>
-
-          <div style={{ textAlign: "center", marginTop: "2rem" }}>
-            <Link
-              href="/admin"
-              style={{
-                fontSize: "0.75rem",
-                color: "rgba(255, 255, 255, 0.3)",
-                letterSpacing: "1px",
-                textDecoration: "none",
-              }}
-            >
-              ⚙️ ÁREA DO ADMINISTRADOR
-            </Link>
-          </div>
         </div>
       </div>
     </main>
